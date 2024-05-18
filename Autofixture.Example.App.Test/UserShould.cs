@@ -1,26 +1,26 @@
+using AutoFixture;
+
 namespace Autofixture.Example.App.Test
 {
     public class UserShould
     {
         private Home home;
+        private Fixture fixture;
+
         [SetUp]
         public void Setup()
         {
             home = new Home();
+            fixture = new Fixture();
         }
 
         [Test]
         public void get_message_under_eighteen_years()
         {
             //Given
-            var givenUserUnderEighteen = new User("Pepito",
-                                                  "Grillo",
-                                                  "Murcia",
-                                                  "000000000",
-                                                  "Hombre",
-                                                  "pepitogrillo@anyemail.com",
-                                                  "000000000",
-                                                  16);
+            var givenUserUnderEighteen = fixture.Build<User>()
+                                                .With(u => u.Age, 16)
+                                                .Create();
 
             //When
             var message = home.Access(givenUserUnderEighteen);
@@ -34,14 +34,9 @@ namespace Autofixture.Example.App.Test
         public void get_message_over_eighteen_under_thirty_years()
         {
             //Given
-            var givenUserOverEighteenUnderThirty = new User("Pepito",
-                                                  "Grillo",
-                                                  "Murcia",
-                                                  "000000000",
-                                                  "Hombre",
-                                                  "pepitogrillo@anyemail.com",
-                                                  "000000000",
-                                                  29);
+            var givenUserOverEighteenUnderThirty = fixture.Build<User>()
+                                                .With(u => u.Age, 29)
+                                                .Create();
 
             //When
             var message = home.Access(givenUserOverEighteenUnderThirty);
@@ -56,14 +51,9 @@ namespace Autofixture.Example.App.Test
         public void get_message_over_thirty_under_sixty_five_years()
         {
             //Given
-            var givenUserOverThirtyUnderSixtyFive = new User("Pepito",
-                                                  "Grillo",
-                                                  "Murcia",
-                                                  "000000000",
-                                                  "Hombre",
-                                                  "pepitogrillo@anyemail.com",
-                                                  "000000000",
-                                                  46);
+            var givenUserOverThirtyUnderSixtyFive = fixture.Build<User>()
+                                                .With(u => u.Age, 46)
+                                                .Create();
 
             //When
             var message = home.Access(givenUserOverThirtyUnderSixtyFive);
@@ -77,14 +67,9 @@ namespace Autofixture.Example.App.Test
         public void get_message_over_sixty_five_years()
         {
             //Given
-            var givenUserOverSixtyFive = new User("Pepito",
-                                                  "Grillo",
-                                                  "Murcia",
-                                                  "000000000",
-                                                  "Hombre",
-                                                  "pepitogrillo@anyemail.com",
-                                                  "000000000",
-                                                  67);
+            var givenUserOverSixtyFive = fixture.Build<User>()
+                                                .With(u => u.Age, 67)
+                                                .Create();
 
             //When
             var message = home.Access(givenUserOverSixtyFive);
